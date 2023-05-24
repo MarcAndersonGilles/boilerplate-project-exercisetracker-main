@@ -81,6 +81,15 @@ app.get('/api/users', (req,res)=> {
     console.error(err)
   })
 })
+app.get('/api/users/:_id/logs', (req,res)=> {
+  Exercise.find({userId: req.params._id}).select('description duration date -_id').exec()
+  .then((response) => {
+    res.json(response)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
 
 // const createAndSavePerson = () => {
 //   const newUser = new User({
