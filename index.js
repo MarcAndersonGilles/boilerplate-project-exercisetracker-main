@@ -72,6 +72,15 @@ app.post('/api/users/:_id/exercises', (req, res) => {
     })
   
 })
+app.get('/api/users', (req,res)=> {
+  User.find().select('username').exec()
+  .then((response) => {
+    res.json(response)
+  })
+  .catch((err) => {
+    console.error(err)
+  })
+})
 
 // const createAndSavePerson = () => {
 //   const newUser = new User({
@@ -90,7 +99,7 @@ app.post('/api/users/:_id/exercises', (req, res) => {
 // createAndSavePerson()
 
 const findPeopleByName = (personName) => {
-  User.find({ name: personName })
+  User.find({ username: personName })
     .then((personFound) => {
       return console.log(personFound)
     })
@@ -98,7 +107,7 @@ const findPeopleByName = (personName) => {
       console.log(err)
     })
 }
-findPeopleByName('John')
+findPeopleByName('Ben')
 
 
 const listener = app.listen(process.env.PORT || 3000, () => {
