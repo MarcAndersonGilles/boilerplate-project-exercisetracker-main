@@ -57,12 +57,20 @@ app.post('/api/users/:_id/exercises', (req, res) => {
   })
   newExercise.save()
     .then((response) => {
-      res.json({ username: response.username, _id: response._id })
+      res.json({
+        username: response.username,
+        _id: response._id,
+        description: response.description,
+        duration: response.duration,
+        date: new Date(response.date).toDateString()
+      })
       console.log(response)
     })
     .catch((err) => {
       console.log(err)
+      res.send('There was a problem adding the information to the database.')
     })
+  
 })
 
 // const createAndSavePerson = () => {
